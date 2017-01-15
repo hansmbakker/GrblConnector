@@ -62,7 +62,7 @@ namespace GrblConnector.Tests.Tests
         [DataRow("WCO:0.000,1.551,5.664", new float[] { 0.0f, 1.551f, 5.664f, 0.0f})]
         public void WorkCoordinateOffsetTest(string workCoordinateOffset, float[] expectedOffset)
         {
-            var line = $"<Hold|FS:0.0,0|{workCoordinateOffset}>";
+            var line = $"<Hold|MPos:0.000,-10.000,5.000|FS:0.0,0|{workCoordinateOffset}>";
 
             var msg = GrblMessage.Parse(line);
             Assert.IsNotNull(msg);
@@ -80,10 +80,10 @@ namespace GrblConnector.Tests.Tests
         }
 
         [TestMethod]
-        [DataRow("Bf:15,128", 15, 128]
+        [DataRow("Bf:15,128", 15, 128)]
         public void BufferStateTest(string bufferState, int expectedAvailableBlocksInPlanner, int expectedAvailableBytesInRx)
         {
-            var line = $"<Hold|FS:0.0,0|{bufferState},WCO:0.000,1.551,5.664>";
+            var line = $"<Hold|WPos:-2.500,0.000,11.000|FS:0.0,0|{bufferState}|WCO:0.000,1.551,5.664>";
 
             var msg = GrblMessage.Parse(line);
             Assert.IsNotNull(msg);

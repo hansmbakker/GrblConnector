@@ -7,7 +7,7 @@ namespace GrblConnector.Grbl.PushMessages
 {
     public enum MachineState
     {
-        Idle, Run, Hold, Jog, Alarm, Door, Check, Home, Sleep
+        Unknown, Idle, Run, Hold, Jog, Alarm, Door, Check, Home, Sleep
     }
 
     [Flags]
@@ -154,6 +154,12 @@ namespace GrblConnector.Grbl.PushMessages
         {
             var parts = machineStateString.Split(':');
             MachineState = (MachineState)Enum.Parse(typeof(MachineState), parts[0]);
+
+            if(MachineState == MachineState.Unknown)
+            {
+                throw new ArgumentException($"Unknown machine state: {machineStateString}");
+            }
+
             if (parts.Length == 2)
             {
                 MachineSubState = int.Parse(parts[1]);
@@ -174,6 +180,10 @@ namespace GrblConnector.Grbl.PushMessages
             else if (parts[0] == "WPos")
             {
                 PositionType = PositionType.WorkPosition;
+            }
+            else
+            {
+                throw new ArgumentException($"Invalid current position: {positionString}");
             }
             var coordinateString = parts[1];
             CurrentPosition = ParseCoordinates(coordinateString);
