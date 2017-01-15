@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)BufferedStreamDevice.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\AlarmMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\BufferState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\CompileOptionPrintoutMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\CoordinateSettingMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\EchoMessage.cs" />

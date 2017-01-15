@@ -24,9 +24,9 @@ using System.Threading.Tasks;
 namespace GrblConnector
 {
 	/// <summary>
-	/// A Serial Port NMEA device
+	/// A Serial Port Grbl device
 	/// </summary>
-	public class SerialPortDevice : NmeaDevice
+	public class SerialPortDevice : GrblDevice
 	{
 		private System.IO.Ports.SerialPort m_port;
 
@@ -37,9 +37,7 @@ namespace GrblConnector
 		/// <exception cref="System.ArgumentNullException">port</exception>
 		public SerialPortDevice(System.IO.Ports.SerialPort port)
 		{
-			if (port == null)
-				throw new ArgumentNullException("port");
-			m_port = port;
+            m_port = port ?? throw new ArgumentNullException("port");
 		}
 
 		/// <summary>
@@ -54,7 +52,7 @@ namespace GrblConnector
 		}
 
 		/// <summary>
-		/// Creates the stream the NmeaDevice is working on top off.
+		/// Creates the stream the GrblDevice is working on top off.
 		/// </summary>
 		/// <returns></returns>
 		protected override Task<System.IO.Stream> OpenStreamAsync()
@@ -63,12 +61,12 @@ namespace GrblConnector
 			return Task.FromResult<System.IO.Stream>(m_port.BaseStream);
 		}
 
-		/// <summary>
-		/// Closes the stream the NmeaDevice is working on top off.
-		/// </summary>
-		/// <param name="stream">The stream.</param>
-		/// <returns></returns>
-		protected override Task CloseStreamAsync(System.IO.Stream stream)
+        /// <summary>
+        /// Closes the stream the GrblDevice is working on top off.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <returns></returns>
+        protected override Task CloseStreamAsync(System.IO.Stream stream)
 		{
 			m_port.Close();
 			return Task.FromResult(true);

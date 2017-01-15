@@ -42,10 +42,7 @@
     <Compile Include="..\GlobalSuppressions.cs">
       <Link>GlobalSuppressions.cs</Link>
     </Compile>
-    <Compile Include="..\GrblConnector.WinStore\BluetoothDevice.cs">
-      <Link>BluetoothDevice.cs</Link>
-    </Compile>
-    <Compile Include="Grbl\PushMessages\BufferState.cs" />
+    <Compile Include="BluetoothDevice.cs" />
     <Compile Include="SerialPortDevice.cs" />
     <Content Include="Properties\GrblConnector.rd.xml" />
   </ItemGroup>

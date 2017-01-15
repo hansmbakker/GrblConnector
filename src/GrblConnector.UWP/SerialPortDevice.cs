@@ -38,9 +38,7 @@ namespace GrblConnector
 		/// <exception cref="System.ArgumentNullException">port</exception>
 		public SerialPortDevice(SerialDevice device)
 		{
-			if (device == null)
-				throw new ArgumentNullException("device");
-			m_port = device;
+            m_port = device ?? throw new ArgumentNullException("device");
 		}
 
 		/// <summary>

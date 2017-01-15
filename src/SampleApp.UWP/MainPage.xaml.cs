@@ -38,7 +38,7 @@ namespace SampleApp.UWP
 			//LoadSerialDeviceGPS();
 		}
 
-		private async void LoadSerialDeviceGPS()
+		private async void LoadSerialDeviceGPSAsync()
 		{
 			var selector = SerialDevice.GetDeviceSelector("COM3");
 			var devices = await DeviceInformation.FindAllAsync(selector);
@@ -56,7 +56,7 @@ namespace SampleApp.UWP
 			}
 		}
 
-		private async void LoadBluetoothGPS()
+		private async void LoadBluetoothGPSAsync()
 		{
 			//Ensure the bluetooth capability is enabled by opening package.appxmanifest in a text editor, 
 			// and add the following to the <Capabilities> section:
