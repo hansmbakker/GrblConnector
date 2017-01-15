@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <version>TODO</version>
+    <authors>TODO</authors>
+    <owners>TODO</owners>
+    <licenseUrl>TODO</licenseUrl>
+    <projectUrl>https://github.com/wind-rider/GrblConnector</projectUrl>
+    <id>TODO</id>
+    <title>GrblConnector</title>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>TODO</description>
+    <language>en-US</language>
+    <tags>grbl cnc winrt wpf win8 win8.1 wp8.1 uwp xamarin serialport bluetooth</tags>
+	<releaseNotes>
+	</releaseNotes>
+  </metadata>
+</package>
