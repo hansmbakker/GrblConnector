@@ -85,7 +85,7 @@ namespace GrblConnector.Grbl.PushMessages
                     }
                     break;
                 case "Pn":
-                    foreach(var pin in messageValue)
+                    foreach (var pin in messageValue)
                     {
                         switch (pin)
                         {
@@ -158,6 +158,10 @@ namespace GrblConnector.Grbl.PushMessages
             {
                 MachineSubState = int.Parse(parts[1]);
             }
+            else
+            {
+                MachineSubState = -1;
+            }
         }
 
         private void ParseCurrentPosition(string positionString)
@@ -166,7 +170,7 @@ namespace GrblConnector.Grbl.PushMessages
             if (parts[0] == "MPos")
             {
                 PositionType = PositionType.MachinePosition;
-            } 
+            }
             else if (parts[0] == "WPos")
             {
                 PositionType = PositionType.WorkPosition;
@@ -178,11 +182,13 @@ namespace GrblConnector.Grbl.PushMessages
         private Vector4 ParseCoordinates(string coordinateString)
         {
             var parts = coordinateString.Split(',');
-            var coordinates = new Vector4(
-                float.Parse(parts[0]),
-                float.Parse(parts[1]),
-                float.Parse(parts[2]),
-                float.Parse(parts[3]));
+
+            var x = float.Parse(parts[0]);
+            var y = float.Parse(parts[1]);
+            var z = float.Parse(parts[2]);
+            var a = parts.Length == 4 ? float.Parse(parts[3]) : 0;
+
+            var coordinates = new Vector4(x, y, z, a);
             return coordinates;
         }
 
