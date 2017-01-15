@@ -37,9 +37,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\..\NmeaParser.WinPhone\NmeaParser.WinPhone.csproj">
+    <ProjectReference Include="..\..\GrblConnector.WinPhone\GrblConnector.WinPhone.csproj">
       <Project>{ea42a713-bc6e-4914-b54b-47c0891b7421}</Project>
-      <Name>NmeaParser.WinPhone</Name>
+      <Name>GrblConnector.WinPhone</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

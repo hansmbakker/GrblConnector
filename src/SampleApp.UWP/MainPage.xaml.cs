@@ -50,7 +50,7 @@ namespace SampleApp.UWP
 				serialDevice.BaudRate = 4800;
 				serialDevice.DataBits = 8;
 				serialDevice.Parity = SerialParity.None;
-				var device = new NmeaParser.SerialPortDevice(serialDevice);
+				var device = new GrblConnector.SerialPortDevice(serialDevice);
 				device.MessageReceived += device_MessageReceived;
 				await device.OpenAsync();
 			}
@@ -77,7 +77,7 @@ namespace SampleApp.UWP
 			RfcommDeviceService rfcommService = await RfcommDeviceService.FromIdAsync(bluetoothDevice.Id);
 			if (rfcommService != null)
 			{
-				var device = new NmeaParser.BluetoothDevice(rfcommService);
+				var device = new GrblConnector.BluetoothDevice(rfcommService);
 				device.MessageReceived += device_MessageReceived;
 				await device.OpenAsync();
 			}
@@ -86,12 +86,12 @@ namespace SampleApp.UWP
 		public async void LoadLocalGpsSimulationData()
 		{
 			var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///NmeaSampleData.txt"));
-			var device = new NmeaParser.NmeaFileDevice(file);
+			var device = new GrblConnector.GrblFileDevice(file);
 			device.MessageReceived += device_MessageReceived;
 			var _ = device.OpenAsync();
 		}
 
-		private void device_MessageReceived(object sender, NmeaParser.NmeaMessageReceivedEventArgs args)
+		private void device_MessageReceived(object sender, GrblConnector.GrblMessageReceivedEventArgs args)
 		{
 			var _ = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
 			{

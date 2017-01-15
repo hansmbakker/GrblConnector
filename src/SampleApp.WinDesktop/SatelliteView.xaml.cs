@@ -27,19 +27,19 @@ namespace SampleApp.WinDesktop
 
 
 
-		public IEnumerable<NmeaParser.Nmea.Gps.Gpgsv> GpgsvMessages
+		public IEnumerable<GrblConnector.Nmea.Gps.Gpgsv> GpgsvMessages
 		{
-			get { return (IEnumerable<NmeaParser.Nmea.Gps.Gpgsv>)GetValue(GpgsvMessagesProperty); }
+			get { return (IEnumerable<GrblConnector.Nmea.Gps.Gpgsv>)GetValue(GpgsvMessagesProperty); }
 			set { SetValue(GpgsvMessagesProperty, value); }
 		}
 
 		// Using a DependencyProperty as the backing store for GpgsvMessages.  This enables animation, styling, binding, etc...
 		public static readonly DependencyProperty GpgsvMessagesProperty =
-			DependencyProperty.Register("GpgsvMessages", typeof(IEnumerable<NmeaParser.Nmea.Gps.Gpgsv>), typeof(SatelliteView), new PropertyMetadata(null, OnGpgsvMessagesChanged));
+			DependencyProperty.Register("GpgsvMessages", typeof(IEnumerable<GrblConnector.Nmea.Gps.Gpgsv>), typeof(SatelliteView), new PropertyMetadata(null, OnGpgsvMessagesChanged));
 
 		private static void OnGpgsvMessagesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			var sats = e.NewValue as IEnumerable<NmeaParser.Nmea.Gps.Gpgsv>;
+			var sats = e.NewValue as IEnumerable<GrblConnector.Nmea.Gps.Gpgsv>;
 			if (sats == null)
 				(d as SatelliteView).satellites.ItemsSource = null;
 			else

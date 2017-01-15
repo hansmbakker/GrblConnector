@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>e15edbd9-0356-422b-8c29-18833787356e</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>GrblConnector</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)BufferedStreamDevice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\AlarmMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\CompileOptionPrintoutMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\CoordinateSettingMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\EchoMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\GcodeParserStateMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\HelpMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\NonQueriedFeedbackMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\ProbeSettingMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\StartupLinePrintoutMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\SettingsPrintoutMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\ToolLengthOffsetMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\StartupLineResponseMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\StatusReportMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\VersionMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\PushMessages\WelcomeMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\ResponseMessages\ErrorMessageType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\ResponseMessages\OkMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\ResponseMessages\ErrorMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IMultiPartMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GrblDevice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NmeaFileDevice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\GrblMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Grbl\UnknownMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StreamDevice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TypedEventHandler.cs" />
+  </ItemGroup>
+</Project>

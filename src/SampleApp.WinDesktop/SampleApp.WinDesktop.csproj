@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SampleApp.WinDesktop</RootNamespace>
     <AssemblyName>SampleApp.WinDesktop</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -151,9 +152,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NmeaParser.WinDesktop\NmeaParser.WinDesktop.csproj">
+    <ProjectReference Include="..\GrblConnector.WinDesktop\GrblConnector.WinDesktop.csproj">
       <Project>{df711ab9-f14e-4f1f-b8f2-b6ddc4691554}</Project>
-      <Name>NmeaParser.WinDesktop</Name>
+      <Name>GrblConnector.WinDesktop</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

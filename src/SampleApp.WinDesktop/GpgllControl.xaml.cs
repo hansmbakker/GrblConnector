@@ -1,4 +1,4 @@
-﻿using NmeaParser.Nmea.Gps;
+﻿using GrblConnector.Nmea.Gps;
 using System;
 using System.Collections.Generic;
 using System.Linq;

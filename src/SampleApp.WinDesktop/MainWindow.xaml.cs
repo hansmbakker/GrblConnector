@@ -21,7 +21,7 @@ namespace SampleApp.WinDesktop
 	public partial class MainWindow : Window
 	{
 		private Queue<string> messages = new Queue<string>(101);
-		private NmeaParser.NmeaDevice currentDevice;
+		private GrblConnector.NmeaDevice currentDevice;
 		//Dialog for browsing to nmea log files
 		private Microsoft.Win32.OpenFileDialog nmeaOpenFileDialog = new Microsoft.Win32.OpenFileDialog()
 		{
@@ -39,10 +39,10 @@ namespace SampleApp.WinDesktop
 			// Use serial portName:
 			//var comPort = availableSerialPorts.First();
 			//var portName = new System.IO.Ports.SerialPort(comPort, 4800);
-			//var device = new NmeaParser.SerialPortDevice(portName);
+			//var device = new GrblConnector.SerialPortDevice(portName);
 
 			//Use a log file for playing back logged data
-			var device = new NmeaParser.NmeaFileDevice("NmeaSampleData.txt");
+			var device = new GrblConnector.NmeaFileDevice("NmeaSampleData.txt");
 
 			StartDevice(device);
 		}
@@ -51,7 +51,7 @@ namespace SampleApp.WinDesktop
 		/// Unloads the current device, and opens the next device
 		/// </summary>
 		/// <param name="device"></param>
-		private void StartDevice(NmeaParser.NmeaDevice device)
+		private void StartDevice(GrblConnector.NmeaDevice device)
 		{
 			//Clean up old device
 			if (currentDevice != null)
@@ -71,17 +71,17 @@ namespace SampleApp.WinDesktop
 			currentDevice = device;
 			currentDevice.MessageReceived += device_MessageReceived;
 			var _ = currentDevice.OpenAsync();
-			if (device is NmeaParser.NmeaFileDevice)
-				currentDeviceInfo.Text = string.Format("NmeaFileDevice( file={0} )", ((NmeaParser.NmeaFileDevice)device).FileName);
-			else if (device is NmeaParser.SerialPortDevice)
+			if (device is GrblConnector.NmeaFileDevice)
+				currentDeviceInfo.Text = string.Format("NmeaFileDevice( file={0} )", ((GrblConnector.NmeaFileDevice)device).FileName);
+			else if (device is GrblConnector.SerialPortDevice)
 			{
 				currentDeviceInfo.Text = string.Format("SerialPortDevice( port={0}, baud={1} )",
-					((NmeaParser.SerialPortDevice)device).Port.PortName,
-					((NmeaParser.SerialPortDevice)device).Port.BaudRate);
+					((GrblConnector.SerialPortDevice)device).Port.PortName,
+					((GrblConnector.SerialPortDevice)device).Port.BaudRate);
 			}
 		}
 		
-		private void device_MessageReceived(object sender, NmeaParser.NmeaMessageReceivedEventArgs args)
+		private void device_MessageReceived(object sender, GrblConnector.NmeaMessageReceivedEventArgs args)
 		{
 			Dispatcher.BeginInvoke((Action) delegate()
 			{
@@ -90,22 +90,22 @@ namespace SampleApp.WinDesktop
 				output.Text = string.Join("\n", messages.ToArray());
 				output.Select(output.Text.Length - 1, 0); //scroll to bottom
 
-				if(args.Message is NmeaParser.Nmea.Gps.Gpgsv)
+				if(args.Message is GrblConnector.Nmea.Gps.Gpgsv)
 				{
-					var gpgsv = (NmeaParser.Nmea.Gps.Gpgsv)args.Message;
+					var gpgsv = (GrblConnector.Nmea.Gps.Gpgsv)args.Message;
 					if(args.IsMultipart && args.MessageParts != null)
-						satView.GpgsvMessages = args.MessageParts.OfType<NmeaParser.Nmea.Gps.Gpgsv>();
+						satView.GpgsvMessages = args.MessageParts.OfType<GrblConnector.Nmea.Gps.Gpgsv>();
 				}
-				if (args.Message is NmeaParser.Nmea.Gps.Gprmc)
-					gprmcView.Message = args.Message as NmeaParser.Nmea.Gps.Gprmc;
-				else if (args.Message is NmeaParser.Nmea.Gps.Gpgga)
-					gpggaView.Message = args.Message as NmeaParser.Nmea.Gps.Gpgga;
-				else if (args.Message is NmeaParser.Nmea.Gps.Gpgsa)
-					gpgsaView.Message = args.Message as NmeaParser.Nmea.Gps.Gpgsa;
-				else if (args.Message is NmeaParser.Nmea.Gps.Gpgll)
-					gpgllView.Message = args.Message as NmeaParser.Nmea.Gps.Gpgll;
-				else if (args.Message is NmeaParser.Nmea.Gps.Garmin.Pgrme)
-					pgrmeView.Message = args.Message as NmeaParser.Nmea.Gps.Garmin.Pgrme;
+				if (args.Message is GrblConnector.Nmea.Gps.Gprmc)
+					gprmcView.Message = args.Message as GrblConnector.Nmea.Gps.Gprmc;
+				else if (args.Message is GrblConnector.Nmea.Gps.Gpgga)
+					gpggaView.Message = args.Message as GrblConnector.Nmea.Gps.Gpgga;
+				else if (args.Message is GrblConnector.Nmea.Gps.Gpgsa)
+					gpgsaView.Message = args.Message as GrblConnector.Nmea.Gps.Gpgsa;
+				else if (args.Message is GrblConnector.Nmea.Gps.Gpgll)
+					gpgllView.Message = args.Message as GrblConnector.Nmea.Gps.Gpgll;
+				else if (args.Message is GrblConnector.Nmea.Gps.Garmin.Pgrme)
+					pgrmeView.Message = args.Message as GrblConnector.Nmea.Gps.Garmin.Pgrme;
 			});
 		}
 
@@ -116,7 +116,7 @@ namespace SampleApp.WinDesktop
 			if (result.HasValue && result.Value)
 			{
 				var file = nmeaOpenFileDialog.FileName;
-				var device = new NmeaParser.NmeaFileDevice(file);
+				var device = new GrblConnector.NmeaFileDevice(file);
 				StartDevice(device);
 			}
 		}
@@ -126,7 +126,7 @@ namespace SampleApp.WinDesktop
 		{
 			var portName = serialPorts.Text as string;
 			var baudRate = int.Parse(baudRates.Text);
-			var device = new NmeaParser.SerialPortDevice(new System.IO.Ports.SerialPort(portName, baudRate));
+			var device = new GrblConnector.SerialPortDevice(new System.IO.Ports.SerialPort(portName, baudRate));
 			StartDevice(device);
 		}
 

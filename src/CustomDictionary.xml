@@ -1,20 +1,12 @@
 ﻿<Dictionary>
 	<Words>
 		<Recognized>
-			<Word>Nmea</Word>
-		</Recognized>
-		<Recognized>
-			<Word>Gps</Word>
-		</Recognized>
-		<Recognized>
-			<Word>Dgps</Word>
+			<Word>Grbl</Word>
 		</Recognized>
 		<!--
+
 		<Unrecognized>
-			<Word>Gps</Word>
-		</Unrecognized>
-		<Unrecognized>
-			<Word>Nmea</Word>
+			<Word></Word>
 		</Unrecognized>
 		<Deprecated>
 			<Term PreferredAlternate=""></Term>
@@ -29,9 +21,7 @@
 	</Words>
 	<!--<Acronyms>
 		<CasingExceptions>
-			<Acronym>Gps</Acronym>
-			<Acronym>Nmea</Acronym>
-			<Acronym>Dgps</Acronym>
+			<Acronym></Acronym>
 		</CasingExceptions>
 	</Acronyms> -->
 </Dictionary>

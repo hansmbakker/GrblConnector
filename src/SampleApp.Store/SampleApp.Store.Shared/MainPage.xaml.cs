@@ -46,7 +46,7 @@ namespace SampleApp.Store
 			RfcommDeviceService rfcommService = await RfcommDeviceService.FromIdAsync(bluetoothDevice.Id);
 			if (rfcommService != null)
 			{
-				var device = new NmeaParser.BluetoothDevice(rfcommService);
+				var device = new GrblConnector.BluetoothDevice(rfcommService);
 				device.MessageReceived += device_MessageReceived;
 				await device.OpenAsync();
 			}
@@ -55,12 +55,12 @@ namespace SampleApp.Store
 		public async void LoadLocalGpsSimulationData()
 		{
 			var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///NmeaSampleData.txt"));
-			var device = new NmeaParser.NmeaFileDevice(file);
+			var device = new GrblConnector.NmeaFileDevice(file);
 			device.MessageReceived += device_MessageReceived;
 			var _ = device.OpenAsync();
         }
 
-		private void device_MessageReceived(object sender, NmeaParser.NmeaMessageReceivedEventArgs args)
+		private void device_MessageReceived(object sender, GrblConnector.NmeaMessageReceivedEventArgs args)
 		{
 			var _ = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
 			{
