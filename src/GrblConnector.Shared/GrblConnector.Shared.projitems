@@ -31,11 +31,21 @@
     <Compile Include="$(MSBuildThisFileDirectory)Grbl\ResponseMessages\ErrorMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IMultiPartMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GrblDevice.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NmeaFileDevice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GrblFileDevice.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Grbl\GrblMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Grbl\UnknownMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MessageStrings\Setting.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MessageStrings\BuildOption.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MessageStrings\AlarmCode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MessageStrings\ErrorCode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StreamDevice.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypedEventHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)csv\alarm_codes_en_US.csv" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)csv\build_option_codes_en_US.csv" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)csv\error_codes_en_US.csv" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)csv\setting_codes_en_US.csv" />
   </ItemGroup>
 </Project>

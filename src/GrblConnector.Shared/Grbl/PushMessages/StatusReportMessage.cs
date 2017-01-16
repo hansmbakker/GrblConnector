@@ -83,6 +83,9 @@ namespace GrblConnector.Grbl.PushMessages
                     {
                         SpindleSpeed = int.Parse(feedSpeedParts[1]);
                     }
+                    else {
+                        SpindleSpeed = -1;
+                    }
                     break;
                 case "Pn":
                     foreach (var pin in messageValue)
@@ -155,7 +158,7 @@ namespace GrblConnector.Grbl.PushMessages
             var parts = machineStateString.Split(':');
             MachineState = (MachineState)Enum.Parse(typeof(MachineState), parts[0]);
 
-            if(MachineState == MachineState.Unknown)
+            if (MachineState == MachineState.Unknown)
             {
                 throw new ArgumentException($"Unknown machine state: {machineStateString}");
             }

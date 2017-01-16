@@ -59,7 +59,7 @@ namespace GrblConnector.Tests.Tests
         }
 
         [TestMethod]
-        [DataRow("WCO:0.000,1.551,5.664", new float[] { 0.0f, 1.551f, 5.664f, 0.0f})]
+        [DataRow("WCO:0.000,1.551,5.664", new float[] { 0.0f, 1.551f, 5.664f, 0.0f })]
         public void WorkCoordinateOffsetTest(string workCoordinateOffset, float[] expectedOffset)
         {
             var line = $"<Hold|MPos:0.000,-10.000,5.000|FS:0.0,0|{workCoordinateOffset}>";
@@ -95,6 +95,89 @@ namespace GrblConnector.Tests.Tests
 
             Assert.AreEqual(statusMsg.BufferState.AvailableBlocksInPlannerBuffer, expectedAvailableBlocksInPlanner);
             Assert.AreEqual(statusMsg.BufferState.AvailableBytesInRxBuffer, expectedAvailableBytesInRx);
+        }
+
+        [TestMethod]
+        [DataRow("Ln:99999", 99999)]
+        public void LineNumberTest(string lineNumberInput, int expectedLineNumber)
+        {
+            var line = $"<Hold|WPos:-2.500,0.000,11.000|FS:0.0,0|{lineNumberInput}|WCO:0.000,1.551,5.664>";
+
+            var msg = GrblMessage.Parse(line);
+            Assert.IsNotNull(msg);
+            Assert.IsInstanceOfType(msg, typeof(StatusReportMessage));
+
+            var statusMsg = msg as StatusReportMessage;
+
+            Assert.AreEqual(statusMsg.LineNumber, expectedLineNumber);
+        }
+
+        [TestMethod]
+        [DataRow("F:500", 500.0f, -1)]
+        [DataRow("F:500.53", 500.53f, -1)]
+        [DataRow("FS:500,8000", 500.0f, 8000)]
+        public void FeedSpeedTest(string feedSpeedInput, float expectedFeedrate, int expectedSpindleSpeed)
+        {
+            var line = $"<Hold|WPos:-2.500,0.000,11.000|FS:0.0,0|{feedSpeedInput}|WCO:0.000,1.551,5.664>";
+
+            var msg = GrblMessage.Parse(line);
+            Assert.IsNotNull(msg);
+            Assert.IsInstanceOfType(msg, typeof(StatusReportMessage));
+
+            var statusMsg = msg as StatusReportMessage;
+
+            Assert.AreEqual(statusMsg.Feed, expectedFeedrate);
+            Assert.AreEqual(statusMsg.SpindleSpeed, expectedSpindleSpeed);
+        }
+
+        [TestMethod]
+        [DataRow("Pn:XDHA", InputPinState.X | InputPinState.Door | InputPinState.Hold | InputPinState.A)]
+        [DataRow("Pn:ZPR", InputPinState.Z | InputPinState.Probe | InputPinState.SoftReset)]
+        [DataRow("Pn:SY", InputPinState.CycleStart | InputPinState.Y)]
+        public void PinStateTest(string pinStateInput, InputPinState expectedPinFlags)
+        {
+            var line = $"<Hold|WPos:-2.500,0.000,11.000|FS:0.0,0|{pinStateInput}|WCO:0.000,1.551,5.664>";
+
+            var msg = GrblMessage.Parse(line);
+            Assert.IsNotNull(msg);
+            Assert.IsInstanceOfType(msg, typeof(StatusReportMessage));
+
+            var statusMsg = msg as StatusReportMessage;
+
+            Assert.AreEqual(statusMsg.InputPinState, expectedPinFlags);
+        }
+
+        [TestMethod]
+        [DataRow("Ov:23,97,143", 23, 97, 143)]
+        public void OverrideTest(string overrideInput, int expectedFeedOverride, int expectedRapidOverride, int expectedSpindleSpeedOverride)
+        {
+            var line = $"<Hold|WPos:-2.500,0.000,11.000|FS:0.0,0|{overrideInput}|WCO:0.000,1.551,5.664>";
+
+            var msg = GrblMessage.Parse(line);
+            Assert.IsNotNull(msg);
+            Assert.IsInstanceOfType(msg, typeof(StatusReportMessage));
+
+            var statusMsg = msg as StatusReportMessage;
+
+            Assert.AreEqual(statusMsg.OverrideFeedPercent, expectedFeedOverride);
+            Assert.AreEqual(statusMsg.OverrideRapidsPercent, expectedRapidOverride);
+            Assert.AreEqual(statusMsg.OverrideSpindleSpeedPercent, expectedSpindleSpeedOverride);
+        }
+
+        [TestMethod]
+        [DataRow("A:SCM", AccessoryState.SpindleCW | AccessoryState.SpindleCCW | AccessoryState.MistCoolant)]
+        [DataRow("A:MSF", AccessoryState.MistCoolant | AccessoryState.SpindleCW | AccessoryState.FloodCoolant)]
+        public void AccessoryTest(string accessoryInput, AccessoryState expectedAccessoryFlags)
+        {
+            var line = $"<Hold|WPos:-2.500,0.000,11.000|FS:0.0,0|{accessoryInput}|WCO:0.000,1.551,5.664>";
+
+            var msg = GrblMessage.Parse(line);
+            Assert.IsNotNull(msg);
+            Assert.IsInstanceOfType(msg, typeof(StatusReportMessage));
+
+            var statusMsg = msg as StatusReportMessage;
+
+            Assert.AreEqual(statusMsg.AccessoryState, expectedAccessoryFlags);
         }
     }
 }
